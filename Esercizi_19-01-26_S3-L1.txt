@@ -10,7 +10,7 @@ SELECT nome, cognome FROM clienti WHERE EXTRACT(YEAR FROM anno_di_nascita)= 1982
 
 es-3--Estrai il numero di fatture con IVA al 22%(quante sono?):
 
-SELECT COUNT(*) AS totale_fattutre_iva_22 FROM fatture WHERE iva=2SELECT
+SELECT COUNT(*) AS totale_fattutre_iva_22 FROM fatture WHERE iva=20
 -------------------------------------------------------------------------------------------------------
 
 es-4--Estrai i prodotti attivati nel 2017 e che sono in produzione oppure in commercio:
