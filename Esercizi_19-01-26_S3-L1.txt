@@ -1,0 +1,38 @@
+es-1--Estrai tutti i clienti con nome 'Mario':
+
+SELECT * FROM clienti WHERE nome='Mario'
+-------------------------------------------------------------------------------------------------------
+
+es-2--Estrai il nome e il cognome dei clienti nati nel 1982:
+
+SELECT nome, cognome FROM clienti WHERE EXTRACT(YEAR FROM anno_di_nascita)= 1982
+-------------------------------------------------------------------------------------------------------
+
+es-3--Estrai il numero di fatture con IVA al 22%(quante sono?):
+
+SELECT COUNT(*) AS totale_fattutre_iva_22 FROM fatture WHERE iva=2SELECT
+-------------------------------------------------------------------------------------------------------
+
+es-4--Estrai i prodotti attivati nel 2017 e che sono in produzione oppure in commercio:
+
+SELECT * FROM prodotti WHERE EXTRACT(YEAR FROM data_attivazione)=2017
+-------------------------------------------------------------------------------------------------------
+
+es-5--Estrai le fatture con importo inferiore a 1000 e i dati dei clienti ad esse collegate:
+
+SELECT * FROM fatture JOIN clienti ON fatture.id_cliente=clienti.numero_cliente WHERE importo <1000
+-------------------------------------------------------------------------------------------------------
+
+es-6--Riportare l'elenco delle fattute(numero, importo, iva e data) con in aggiunta il nome del fornitore:
+
+SELECT numero_fattura, importo, iva, data_fattura, fornitori.denominazione FROM fatture JOIN fornitori ON fatture.numero_fornitore=fornitori.numero_fornitore 
+-------------------------------------------------------------------------------------------------------
+
+es-7--Considerando soltanto le fatture con iva al 20%, estrarre il numero di fatture (conteggio di fatture) pero ogni anno:
+
+SELECT EXTRACT(YEAR FROM data_fattura) AS anno, 
+COUNT(*) AS fatture_con_iva_22_per_ogni_anno 
+FROM fatture WHERE iva=22  GROUP BY (data_fattura) 
+--------------------------------------------------------------------------------------------------------
+
+es-8--Riportare il numero di fatture(conteggio fatture) e la somma dei relativi importi divisi per anno di fatturazione:
