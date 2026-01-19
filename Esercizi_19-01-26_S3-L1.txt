@@ -10,12 +10,12 @@ SELECT nome, cognome FROM clienti WHERE EXTRACT(YEAR FROM anno_di_nascita)= 1982
 
 es-3--Estrai il numero di fatture con IVA al 22%(quante sono?):
 
-SELECT COUNT(*) AS totale_fattutre_iva_22 FROM fatture WHERE iva=20
+SELECT COUNT(*) AS totale_fattutre_iva_20 FROM fatture WHERE iva=20
 -------------------------------------------------------------------------------------------------------
 
 es-4--Estrai i prodotti attivati nel 2017 e che sono in produzione oppure in commercio:
 
-SELECT * FROM prodotti WHERE EXTRACT(YEAR FROM data_attivazione)=2017
+SELECT * FROM prodotti WHERE EXTRACT(YEAR FROM data_attivazione)=2017 AND in_produzione = true || in_commercio=true
 -------------------------------------------------------------------------------------------------------
 
 es-5--Estrai le fatture con importo inferiore a 1000 e i dati dei clienti ad esse collegate:
@@ -31,8 +31,17 @@ SELECT numero_fattura, importo, iva, data_fattura, fornitori.denominazione FROM 
 es-7--Considerando soltanto le fatture con iva al 20%, estrarre il numero di fatture (conteggio di fatture) pero ogni anno:
 
 SELECT EXTRACT(YEAR FROM data_fattura) AS anno, 
-COUNT(*) AS fatture_con_iva_22_per_ogni_anno 
-FROM fatture WHERE iva=22  GROUP BY (data_fattura) 
+COUNT(*) AS fatture_con_iva_20_per_ogni_anno 
+FROM fatture WHERE iva=20  GROUP BY (anno) 
 --------------------------------------------------------------------------------------------------------
 
 es-8--Riportare il numero di fatture(conteggio fatture) e la somma dei relativi importi divisi per anno di fatturazione:
+
+SELECT EXTRACT(YEAR FROM data_fattura) AS anno, COUNT(*) AS numero_fatture, SUM(importo) AS somma_importi
+FROM fatture GROUP BY EXTRACT(YEAR FROM data_fattura) ORDER BY anno
+---------------------------------------------------------------------------------------------------------
+
+EXTRA________
+1_
+Estarre gli anni in cui sono state registrate più di 2 fatture con tipologia "A":
+
